@@ -11,15 +11,27 @@ const client = new MongoClient(process.env.MONGO_URI, {
     }
 });
 
-async function run() {
-    try {
-        await client.connect();
-        await client.db("admin").command({ ping: 1 });
-
-        console.log("Pinged your deployment. You successfully connected to MongoDB!.");
-    } finally {
-        await client.close();
+let database
+module.exports = {
+    connectToServer: () => {
+        database =  client.db(blogData);
+    },
+    getDb: () => {
+        return database
     }
 }
 
-run().catch(console.dir);
+console.log("Connecting to");
+
+// async function run() {
+//     try {
+//         await client.connect();
+//         await client.db("admin").command({ ping: 1 });
+
+//         console.log("Pinged your deployment. You successfully connected to MongoDB!.");
+//     } finally {
+//         await client.close();
+//     }
+// }
+
+// run().catch(console.dir);
