@@ -90,4 +90,70 @@ const singlePostController = async(req, res) => {
     }
 }
 
-module.exports = { getAllPostController, createPostController, singlePostController }
+/* UPDATE POST CONTROLLER */
+const updatePostController = async(req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(404).send({ 
+                success: false,
+                message: 'Please provide food id.'
+            }); 
+        }
+
+        const food = await PostModel.findById(id);
+        if (!food) {
+            return res.status(500).send({ 
+                success: false,
+                message: 'No food available'
+            });
+        }
+
+        const { title, description, content, author } = req.body;
+        
+        const updatePost = await PostModel.findByIdAndUpdate(id, { title, description, content, author }, { new: true });
+        
+        res.status(200).send({
+            success: true,
+            message: 'Post updated successfully',
+            updatePost
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: `Error In Update Post API: ${error.message}`,
+            error
+        });
+    }
+}
+
+/* DELETE POST CONTROLLER */
+const deletePostController = async(req, res) => {
+    try {
+        if (!req.params.id) {
+            return res.status(404).send({ 
+                success: false,
+                message: 'Please provide post id.'
+            }); 
+        }
+
+        await PostModel.findByIdAndDelete(req.params.id);
+        
+        res.status(200).send({
+            success: true,
+            message: 'Post deleted successfully'
+        });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: `Error In Delete Post API: ${error.message}`,
+            error
+        });
+    }
+}
+
+module.exports = { getAllPostController, createPostController, singlePostController, updatePostController, deletePostController }
