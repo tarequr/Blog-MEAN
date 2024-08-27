@@ -16,7 +16,7 @@ const app = express();
 
 //middlewares
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
 
 // app.use(morgan("dev"));
 
@@ -26,7 +26,7 @@ app.use('/api/v1/posts', require('./routes/postRoutes'));
 
 
 app.get('/', (req, res) => {
-    return res.status(200).send("<h1>Welcome to Food Server</h1>");
+    return res.status(200).send("<h1>Welcome to Blog Server</h1>");
 });
 
 
