@@ -1,1 +1,1 @@
-# Blog-MEAN
+# Blog-MERN
