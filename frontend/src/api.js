@@ -24,12 +24,16 @@ export async function getPost(id) {
     return
 }
 
-export async function createPost() {
-    // Create post
+export async function createPost(post) {
+    // http://localhost:3000/posts
+    const response = await axios.post(`${URL}/posts`, post);
+    return response
 }
 
-export async function updatePost(id) {
-    // Update post
+export async function updatePost(id, post) {
+    // http://localhost:3000/posts
+    const response = await axios.post(`${URL}/posts/${id}`, post);
+    return response
 }
 
 export async function deletePost(id) {
