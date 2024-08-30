@@ -6,16 +6,16 @@ import './App.css'
 function App() {
   const [ postData, setPostData ] = useState();
 
-  // async function createPost() {
-  //   let postObject = {
-  //     title: "This is a system title",
-  //     description: "This is a system description",
-  //     content: "This is a system content",
-  //     author: "Md. System Author",
-  //   }
+  async function createPostHandler() {
+    let postObject = {
+      title: "This is a system title 2",
+      description: "This is a system description 2",
+      content: "This is a system content 2",
+      author: "Md. System Author 2",
+    }
 
-  //   await axios.post("http://localhost:3000/api/v1/posts/create", postObject);
-  // }
+    createPost(postObject);
+  }
 
   useEffect(() => {
     async function loadPosts() {
@@ -30,7 +30,13 @@ function App() {
 
   return (
     <>
-      
+      { JSON.stringify(postData) }
+      <br />
+      <br />
+
+      <button onClick={ createPostHandler }>
+        Create Post
+      </button>
     </>
   )
 }
