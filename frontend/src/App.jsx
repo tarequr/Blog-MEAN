@@ -8,6 +8,9 @@ import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Profile from './pages/Profile';
 import ReadBlog from './pages/ReadBlog';
+import Navbar from './components/Navbar';  // Import Navbar without braces
+import Layout from './components/Layout';  // Import Layout based on how it's exported
+
 
 function App() {
   //Pages
@@ -24,12 +27,14 @@ function App() {
     <Router>
         <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/create-blog" element={<CreateBlog />} />
-            <Route path="/read-blog/:id" element={<ReadBlog />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route element={<Layout/>}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/create-blog" element={<CreateBlog />} />
+              <Route path="/read-blog/:id" element={<ReadBlog />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
         </Routes>
     </Router>
   );
