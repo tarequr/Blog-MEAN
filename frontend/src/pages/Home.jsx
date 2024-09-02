@@ -9,6 +9,7 @@ function Home() {
   useEffect(() => {
     async function getPostsHandel() {
       const data = await getPosts();
+      data.sort(d1, d2) => new Date(d2.createdAt).getTime() - new Date(d1.createdAt).getTime();
       // console.log(data);
       setPosts(data.posts);
     }
@@ -17,13 +18,13 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div className='posts'>
       { posts.map((post, id) => {
         return(
           <BlogCard key={id} post={post}/>
         )
       }) }
-    </>
+    </div>
   )
 }
 
