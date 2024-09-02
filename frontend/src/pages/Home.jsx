@@ -1,6 +1,7 @@
 import React from 'react'
 import { getPosts } from '../api'
 import { useState, useEffect } from 'react'
+import BlogCard from '../components/BlogCard';
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -17,13 +18,9 @@ function Home() {
 
   return (
     <>
-      { posts.map((post) => {
+      { posts.map((post, id) => {
         return(
-          <>
-            <h1>{ post.title }</h1>
-            <h2>{ post.description }</h2>
-            <p>{ post.createdAt }</p>
-          </>
+          <BlogCard key={id} post={post}/>
         )
       }) }
     </>
