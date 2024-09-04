@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     async function getPostsHandel() {
       const data = await getPosts();
-      data.sort(d1, d2) => new Date(d2.createdAt).getTime() - new Date(d1.createdAt).getTime();
+      data.posts.sort((d1, d2) => new Date(d2.createdAt).getTime() - new Date(d1.createdAt).getTime());
       // console.log(data);
       setPosts(data.posts);
     }
