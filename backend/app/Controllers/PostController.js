@@ -8,7 +8,7 @@ const getAllPostController = async(req, res) => {
         if (!posts) {
             return res.status(404).send({ 
                 success: false,
-                message: 'No food available'
+                message: 'No post available'
             });
         }
 
@@ -64,7 +64,7 @@ const singlePostController = async(req, res) => {
         if (!req.params.id) {
             return res.status(404).send({ 
                 success: false,
-                message: 'Please provide food id.'
+                message: 'Please provide post id.'
             }); 
         }
 
@@ -97,15 +97,15 @@ const updatePostController = async(req, res) => {
         if (!id) {
             return res.status(404).send({ 
                 success: false,
-                message: 'Please provide food id.'
+                message: 'Please provide post id.'
             }); 
         }
 
-        const food = await PostModel.findById(id);
-        if (!food) {
+        const post = await PostModel.findById(id);
+        if (!post) {
             return res.status(500).send({ 
                 success: false,
-                message: 'No food available'
+                message: 'No post available'
             });
         }
 
