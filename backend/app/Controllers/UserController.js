@@ -126,11 +126,11 @@ const updateUserController = async (req, res) => {
             });
         }
 
-        const { name, email, password, posts } = req.body; // Use fields that match UserModel
+        const { name, email, password, joinDate, posts } = req.body; // Use fields that match UserModel
         
         const updatedUser = await UserModel.findByIdAndUpdate(
             id, 
-            { name, email, password, posts }, // Update relevant fields
+            { name, email, password, joinDate, posts }, // Update relevant fields
             { new: true } // Return the updated user document
         );
         
