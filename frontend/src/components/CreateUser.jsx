@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { createUser } from '../api';
 
 function CreateUser() {
     const [user, setUser] = useState({
@@ -8,12 +9,25 @@ function CreateUser() {
         password: ""
     });
 
+    const [message, setMessage] = useState(null);
+
     function handleChange(event) {
         setUser({ ...user, [event.target.name] : event.target.value })
     }
 
-    async function handleSubmit() {
-        // Create  
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        try {
+            const response = await createUser(user);
+            if (response.status === 201) {
+                setMessage('User created successfully!');
+            } else {
+                setMessage('Failed to create user');
+            }
+        } catch (error) {
+            setMessage(`Error: ${error.message}`);
+        }
     }
 
     return (
