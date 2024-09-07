@@ -23,6 +23,7 @@ app.use(express.json());
 //route
 //URL => http://localhost:8080
 app.use('/api/v1/posts', require('./routes/postRoutes'));
+app.use('/api/v1/users', require('./routes/userRoutes'));
 
 
 app.get('/', (req, res) => {
