@@ -1,4 +1,6 @@
 const UserModel = require("../Models/UserModel");
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 6;
 
 /* GET ALL USERS CONTROLLER */
 const getAllUserController = async(req, res) => {
@@ -31,6 +33,7 @@ const getAllUserController = async(req, res) => {
 const createUserController = async (req, res) => {
     try {
         const { name, email, password, posts } = req.body;
+        const hashPassword = await bcrypt.hash(String(password), SALT_ROUNDS);
 
         /* Validation */
         if (!name || !email || !password) {
@@ -53,7 +56,7 @@ const createUserController = async (req, res) => {
         const newUser = new UserModel({
             name,
             email,
-            password,
+            password: hashPassword,
             joinDate: Date.now(), // Optional, defaults to now
             posts: posts || [] // Optional, defaults to an empty array
         });
