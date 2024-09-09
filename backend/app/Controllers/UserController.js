@@ -196,7 +196,7 @@ const loginUserController = async (req, res) => {
         const user = await UserModel.findOne({ email });
 
         if (user) {
-            let isPasswordValid = await bcrypt.compare(user.password, password);
+            let isPasswordValid = await bcrypt.compare(password, user.password);
             if (isPasswordValid) {
                 return res.status(200).send({
                     success: true,
