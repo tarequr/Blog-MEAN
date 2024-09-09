@@ -180,4 +180,48 @@ const deleteUserController = async(req, res) => {
     }
 }
 
-module.exports = { getAllUserController, createUserController, singleUserController, updateUserController, deleteUserController }
+/* LOGIN USER CONTROLLER */
+const loginUserController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        /* Validation */
+        if (!email || !password) {
+            return res.status(400).send({ 
+                success: false,
+                message: 'Please provide all required fields (email, password)'
+            });
+        }
+
+        const user = await UserModel.findOne({ email });
+
+        if (user) {
+            let isPasswordValid = await bcrypt.compare(user.password, password);
+            if (isPasswordValid) {
+                return res.status(200).send({
+                    success: true,
+                    user
+                });
+            } else {
+                return res.status(401).send({
+                    success: false,
+                    message: 'Passwords do not match.'
+                }); 
+            }
+        } else {
+            return res.status(404).send({
+                success: false,
+                message: 'User not found.'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            success: false,
+            message: `Error in Login User API: ${error.message}`,
+            error
+        });
+    }
+}
+
+module.exports = { getAllUserController, createUserController, singleUserController, updateUserController, deleteUserController, loginUserController }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUserController, createUserController, singleUserController, updateUserController, deleteUserController } = require('../app/Controllers/UserController');
+const { getAllUserController, createUserController, singleUserController, updateUserController, deleteUserController, loginUserController } = require('../app/Controllers/UserController');
 
 let router = express.Router();
 
@@ -13,6 +13,7 @@ router.post('/create', createUserController);
 router.put('/update/:id', updateUserController);
 // #5 - Delete One
 router.delete('/delete/:id', deleteUserController);
-
+// #5 - Login One
+router.post('/login', loginUserController);
 
 module.exports = router
