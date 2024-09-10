@@ -90,9 +90,10 @@ export async function deleteUser(id) {
 export async function verifyUser(user) {
     // http://localhost:3000/api/v1/users/login
     const response = await axios.post(`${URL}/users/login`, user);
-    if (response.success) {
-        return response.data;
+
+    if (response.data.success) {
+        return response.data.user;
     } else {
-        throw new Error(response.message)
+        return
     }
 }

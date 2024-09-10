@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { verifyUser } from '../api';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [user, setUser] = useState({
@@ -8,6 +9,8 @@ function Login() {
     });
 
     const [message, setMessage] = useState(null);
+
+    const navigate = useNavigate();
 
     function handleChange(event) {
         setUser({ ...user, [event.target.name] : event.target.value })
@@ -18,8 +21,10 @@ function Login() {
 
         try {
             const response = await verifyUser(user);
-            if (response.status === 200) {
+
+            if (response) {
                 setMessage('User login successfully!');
+                navigate("/home");
             } else {
                 setMessage('Failed to login user');
             }
