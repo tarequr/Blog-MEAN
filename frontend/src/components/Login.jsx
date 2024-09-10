@@ -21,10 +21,12 @@ function Login() {
 
         try {
             const response = await verifyUser(user);
-
+            // console.log(response);
             if (response) {
                 setMessage('User login successfully!');
                 navigate("/home");
+
+                sessionStorage.setItem("user", response);
             } else {
                 setMessage('Failed to login user');
             }

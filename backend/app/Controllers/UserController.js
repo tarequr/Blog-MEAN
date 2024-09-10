@@ -1,6 +1,10 @@
 const UserModel = require("../Models/UserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv  = require('dotenv');
 const SALT_ROUNDS = 6;
+
+dotenv.config();
 
 /* GET ALL USERS CONTROLLER */
 const getAllUserController = async(req, res) => {
@@ -197,10 +201,15 @@ const loginUserController = async (req, res) => {
 
         if (user) {
             let isPasswordValid = await bcrypt.compare(password, user.password);
+           
             if (isPasswordValid) {
+                const plainUser = JSON.parse(JSON.stringify(user));
+                const token = jwt.sign(plainUser, process.env.SECRET_KEY, { expiresIn: "1h" });
+                
                 return res.status(200).send({
                     success: true,
-                    user
+                    user,
+                    token
                 });
             } else {
                 return res.status(401).send({
