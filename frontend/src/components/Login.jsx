@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { verifyUser } from '../api';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function Login() {
     const [user, setUser] = useState({
@@ -26,6 +27,7 @@ function Login() {
                 setMessage('User login successfully!');
                 navigate("/home");
 
+                axios.defaults.headers.common["Authorization"] = `Bearer ${response}`;
                 sessionStorage.setItem("user", response);
             } else {
                 setMessage('Failed to login user');

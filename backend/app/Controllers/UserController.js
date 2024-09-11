@@ -212,7 +212,7 @@ const loginUserController = async (req, res) => {
                     token
                 });
             } else {
-                return res.status(401).send({
+                return res.status(404).send({
                     success: false,
                     message: 'Passwords do not match.'
                 }); 
