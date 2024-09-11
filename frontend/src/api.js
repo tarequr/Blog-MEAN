@@ -11,6 +11,24 @@ export async function getPosts() {
     }
 
     return
+
+    // try {
+    //     const token = sessionStorage.getItem('User');
+    //     console.log('Token:', token); // Log the token to check if it's being retrieved
+    
+    //     // If the token exists, add it to the request headers
+    //     const config = {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`
+    //       }
+    //     };
+    
+    //     const response = await axios.get(`${URL}/posts`, config);  // Pass headers to the request
+    //     return response.data;
+    //   } catch (error) {
+    //     console.error('Error fetching posts:', error.response ? error.response.data : error.message);  // Log the error
+    //     throw error;
+    //   }
 }
 
 export async function getPost(id) {

@@ -1,7 +1,14 @@
+const JWT = require('jsonwebtoken');
+
 module.exports = async (req, res, next) => {
     try {
         /** GET TOKEN **/
-        const token = req.headers["authorization"].split(" ")[1];
+        const authHeaders = req.headers["authorization"];
+        const token = authHeaders && authHeaders.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).json({message: `Authentication token is missing`});
+        }
 
         JWT.verify(token, process.env.SECRET_KEY, (err, user) => {
             if (err) {

@@ -10,19 +10,23 @@ import Profile from './pages/Profile';
 import ReadBlog from './pages/ReadBlog';
 import Navbar from './components/Navbar';  // Import Navbar without braces
 import Layout from './components/Layout';  // Import Layout based on how it's exported
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 function App() {
-  //Pages
 
-  //Landing pages
-  //Home page (Fitered by recency)
-  //ReadBlog
-  //CreateBlog
-  //Profile
-  //About
-  //Contact
+  useEffect(() => {
+    let token = sessionStorage.getItem("User");
   
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      // console.log("Token is set in the headers:", token);  // Debugging line
+    } else {
+      console.log("No token found");
+    }
+  }, []);
+
   return (
     <Router>
         <Routes>

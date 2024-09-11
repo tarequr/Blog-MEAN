@@ -25,10 +25,11 @@ function Login() {
             // console.log(response);
             if (response) {
                 setMessage('User login successfully!');
-                navigate("/home");
 
+                sessionStorage.setItem("User", response);
                 axios.defaults.headers.common["Authorization"] = `Bearer ${response}`;
-                sessionStorage.setItem("user", response);
+                
+                navigate("/home");
             } else {
                 setMessage('Failed to login user');
             }
