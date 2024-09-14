@@ -29,6 +29,7 @@ const getAllPostController = async(req, res) => {
 
 /* CREATE POST CONTROLLER */
 const createPostController = async(req, res) => {
+
     try {
         const { title, description, content, author } = req.body;
 
@@ -40,7 +41,7 @@ const createPostController = async(req, res) => {
             });
         }
 
-        const newPost = new PostModel({ title, description, content, author });
+        const newPost = new PostModel({ title, description, content, author: req.body.user });
         await newPost.save();
 
         res.status(200).send({
